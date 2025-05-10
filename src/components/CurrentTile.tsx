@@ -1,7 +1,6 @@
 import "./CurrentTile.css";
 import { useEffect, useState } from "react";
 import WeatherIcon, { WeatherType } from "./WeatherIcon";
-import { DAYS, MONTHS } from "../Define";
 
 export interface ICurrentWeatherCard
 {
