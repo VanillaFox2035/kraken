@@ -38,25 +38,21 @@ export default function CurrentTile(props: ICurrentTile)
     // Weather update
     const [weatherCard, setWeatherCard] = useState(defaultCard);
 
-
-    function SetTimeTile()
+    function UpdateWeatherCard() 
     {
-        // Do nothing
+        setWeatherCard(props.weatherCard);
     }
 
     useEffect(() => {
-        // Update on prop change
-        setWeatherCard(props.weatherCard);
-
-        // Update every 0.1 seconds
-        SetTimeTile();
-        const interval = setInterval(SetTimeTile, 100);
+        const interval =setInterval(() => {
+            UpdateWeatherCard();
+        }, 1000);
 
         // Clear clock after component destroyed
         return () => {
             clearInterval(interval);
         }
-    }, [props]);
+    }, []);
 
     function CheckNotAvailable(input :number): string
 	{
@@ -68,12 +64,10 @@ export default function CurrentTile(props: ICurrentTile)
 	}
 
     return (
-        <>
         <div className="current-tile">
             <WeatherIcon weather={weatherCard.weather} isNight={weatherCard.isNight} width="150px" title={weatherCard.weatherString}/> 
             <h1 className="current-temperature">{CheckNotAvailable(weatherCard.temperature)}°</h1>
         </div>
-        </>
     );
 }
 
