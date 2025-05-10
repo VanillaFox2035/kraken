@@ -2,7 +2,6 @@
 import { ICurrentWeatherCard, defaultCard as defaultCardCurrent } from "./components/CurrentTile";
 import { WeatherType } from "./components/WeatherIcon";
 import { host } from "./App";
-import { DAYS } from "./Define";
 
 export default class Host
 {
