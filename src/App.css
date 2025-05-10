@@ -1,0 +1,13 @@
+#root {
+  width: 240px;
+  height: 240px;
+  margin: 0;
+}
+
+.credit
+{
+  font-family: monospace;
+  color:darkgray;
+}
+
+
