@@ -39,11 +39,11 @@ export default function CurrentTile(props: ICurrentTile)
     const [weatherCard, setWeatherCard] = useState(defaultCard);
 
     // Time update
-    const [time, setTime] = useState("00:00");
+    const [timeSecond, setTimeSecond] = useState("00");
 
     function SetTimeTile()
     {
-        setTime(GetFormattedTime());
+        setTimeSecond(GetFormattedTimeSecond());
     }
 
     useEffect(() => {
@@ -52,7 +52,7 @@ export default function CurrentTile(props: ICurrentTile)
 
         // Update every 0.1 seconds
         SetTimeTile();
-        const interval = setInterval(SetTimeTile, 1000);
+        const interval = setInterval(SetTimeTile, 100);
 
         // Clear clock after component destroyed
         return () => {
@@ -60,11 +60,10 @@ export default function CurrentTile(props: ICurrentTile)
         }
     }, [props]);
 
-    function GetFormattedTime(): string
+    function GetFormattedTimeSecond(): string
     {
-        const hour = PadNumber(new Date().getHours(), 2);
-        const minute = PadNumber(new Date().getMinutes(), 2);
-        const result = hour + ":" + minute;
+        const second: string = PadNumber(new Date().getSeconds(), 2);
+        const result = ":" + second;
         return result;
     }
 
@@ -90,9 +89,9 @@ export default function CurrentTile(props: ICurrentTile)
     return (
         <>
         <div className="current-tile">
-            <WeatherIcon weather={weatherCard.weather} isNight={weatherCard.isNight} width="150px" title={weatherCard.weatherString}/> 
+            <WeatherIcon weather={weatherCard.weather} isNight={weatherCard.isNight} width="150spx" title={weatherCard.weatherString}/> 
             <h1 className="current-temperature">{CheckNotAvailable(weatherCard.temperature)}°</h1>
-            <div className="current-time">{time}</div>
+            <div className="current-time">{timeSecond}</div>
         </div>
         </>
     );
