@@ -81,6 +81,7 @@ export default class Host
 	private AlertError(error: string)
 	{
 		console.error(error);
+		host.weatherCardCurrent.error = error;
 	}
 
 	private async SendRequest(url: string, resolve: (data: object) => void, reject: (error: string) => void)

@@ -56,7 +56,7 @@ export default function WeatherIcon(props: IWeatherIcon)
 
     function GetIconPath(weather: WeatherType): string
     {
-        const base = "/kraken";
+        const base = import.meta.env.BASE_URL;
         const dir = "/WeatherIcons/Google/";
         let file = "question-mark";
         switch (weather)
