@@ -56,6 +56,7 @@ export default function WeatherIcon(props: IWeatherIcon)
 
     function GetIconPath(weather: WeatherType): string
     {
+        const base = "/kraken";
         const dir = "/WeatherIcons/Google/";
         let file = "question-mark";
         switch (weather)
@@ -151,7 +152,7 @@ export default function WeatherIcon(props: IWeatherIcon)
                 file = "question-mark";
                 break;
         }
-        return dir + file + ".svg";
+        return base + dir + file + ".svg";
     }
 
     return (
