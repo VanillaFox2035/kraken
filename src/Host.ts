@@ -8,7 +8,7 @@ export default class Host
     // Public accessed data
 	private isInitialized = false;
     public weatherCardCurrent: ICurrentWeatherCard = {...defaultCardCurrent}; // Deep copy
-	public currentLocation: string = "新莊";
+	public currentLocation: string = "名間";
 	public locationList: any = {};
 
     constructor()
@@ -48,7 +48,7 @@ export default class Host
 		}
 		else
 		{
-			this.currentLocation = "新莊"; // Default when no location given
+			this.currentLocation = "名間"; // Default when no location given
 		}
 	}
 	
