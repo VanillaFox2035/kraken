@@ -13,7 +13,6 @@ export interface ICurrentWeatherCard
     temperature: number;
     precipitation: number;
     humidity: number;
-    error: string;
 }
 
 export const defaultCard: ICurrentWeatherCard = 
@@ -27,7 +26,6 @@ export const defaultCard: ICurrentWeatherCard =
     temperature: 0,
     precipitation: 0,
     humidity: 0,
-    error: "No error"
 }
 
 interface ICurrentTile
@@ -91,7 +89,6 @@ export default function CurrentTile(props: ICurrentTile)
     return (
         <>
         <div className="current-tile">
-            <div>{weatherCard.error}</div>
             <WeatherIcon weather={weatherCard.weather} isNight={weatherCard.isNight} width="150spx" title={weatherCard.weatherString}/> 
             <h1 className="current-temperature">{CheckNotAvailable(weatherCard.temperature)}°</h1>
             <div className="current-time">{timeSecond}</div>
