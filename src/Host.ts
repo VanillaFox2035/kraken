@@ -30,14 +30,16 @@ export default class Host
     public RequestWeatherData()
     {
 		console.log(`Requested weather data at ${this.GetDateString()}`);
-        const url = "https://122.117.246.47:4200/";
+        //const url = "https://122.117.246.47:4200/";
+		const url = "https://weatherdata.vanillafox.site:4200/";
         this.SendRequest(url + "CurrentWeather", this.ParseCurrentWeather, this.AlertError);
     }
 
 	public RequestLocationData()
 	{
 		console.log(`Requested location data at ${this.GetDateString()}`);
-        const url = "https://122.117.246.47:4200/";
+		//const url = "https://122.117.246.47:4200/";
+        const url = "https://weatherdata.vanillafox.site:4200/";
 		this.SendRequest(url + "LocationList", this.SaveLocationData, this.AlertError);
 		const query = window.location.search;
 		const params = new URLSearchParams(query);
@@ -98,7 +100,7 @@ export default class Host
 		}
 		catch (e)
 		{
-			reject(`Fetching ${url} failed! ${e}`);
+			reject(`Fetching ${url + "?location=" + host.currentLocation} failed! ${e}`);
 		}
 		resolve(data);
 	}
