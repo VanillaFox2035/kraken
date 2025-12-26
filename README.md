@@ -1,8 +1,12 @@
-To deploy the project to Github Pages, run
+## Install
+* Run:
 ```
-npm run predeploy
+npm install
+npm run dev
 ```
-then
+
+## Deploy
+* To deploy the website, run:
 ```
 npm run deploy
 ```
