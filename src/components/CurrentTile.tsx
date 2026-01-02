@@ -79,9 +79,9 @@ export default function CurrentTile(props: ICurrentTile)
 
     function CheckNotAvailable(input :number): string
 	{
-		if (input === -99)
+		if (input.toString() === "-99")
 		{
-			return "N/A";
+			return "?";
 		}
 		return input.toString();
 	}
