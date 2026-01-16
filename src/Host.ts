@@ -74,7 +74,7 @@ export default class Host
 		host.weatherCardCurrent.weather = host.TranslateWeather(weatherData.Weather);
 		host.weatherCardCurrent.weatherString = weatherData.Weather;
 		host.weatherCardCurrent.isNight = host.GetIsNight(new Date().getHours());
-		host.weatherCardCurrent.temperature = Math.round(weatherData.AirTemperature);
+		host.weatherCardCurrent.temperature = Math.round(weatherData.AirTemperature).toString();
 		host.weatherCardCurrent.precipitation = weatherData.Now.Precipitation;
 		host.weatherCardCurrent.humidity = weatherData.RelativeHumidity;
 		host.weatherCardCurrent.lastUpdated = lastUpdatedHour + ":" + lastUpdatedMinute;
