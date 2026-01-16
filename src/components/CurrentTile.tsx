@@ -10,22 +10,22 @@ export interface ICurrentWeatherCard
     weather: WeatherType;
     weatherString: string;
     isNight: boolean;
-    temperature: number;
-    precipitation: number;
-    humidity: number;
+    temperature: string;
+    precipitation: string;
+    humidity: string;
 }
 
 export const defaultCard: ICurrentWeatherCard = 
 {
-    lastUpdated: "00:00",
-    location: "新莊",
-    locationSub: "Xinzhuang",
-    weather: WeatherType.Clear,
-    weatherString: "晴",
+    lastUpdated: "-",
+    location: "-",
+    locationSub: "-",
+    weather: WeatherType.Unknown,
+    weatherString: "?",
     isNight: false,
-    temperature: 0,
-    precipitation: 0,
-    humidity: 0,
+    temperature: "-",
+    precipitation: "-",
+    humidity: "-",
 }
 
 interface ICurrentTile
@@ -39,7 +39,7 @@ export default function CurrentTile(props: ICurrentTile)
     const [weatherCard, setWeatherCard] = useState(defaultCard);
 
     // Time update
-    const [timeSecond, setTimeSecond] = useState("00");
+    const [timeSecond, setTimeSecond] = useState("-");
 
     function SetTimeTile()
     {
@@ -51,14 +51,14 @@ export default function CurrentTile(props: ICurrentTile)
         setWeatherCard(props.weatherCard);
 
         // Update every 0.1 seconds
-        SetTimeTile();
+        //SetTimeTile();
         const interval = setInterval(SetTimeTile, 100);
 
         // Clear clock after component destroyed
         return () => {
             clearInterval(interval);
         }
-    }, [props]);
+    }, []);
 
     function GetFormattedTimeSecond(): string
     {
@@ -77,11 +77,11 @@ export default function CurrentTile(props: ICurrentTile)
         return result;
     }
 
-    function CheckNotAvailable(input :number): string
+    function CheckNotAvailable(input :string): string
 	{
 		if (input.toString() === "-99")
 		{
-			return "?";
+			return "-";
 		}
 		return input.toString();
 	}
@@ -89,7 +89,7 @@ export default function CurrentTile(props: ICurrentTile)
     return (
         <>
         <div className="current-tile">
-            <WeatherIcon weather={weatherCard.weather} isNight={weatherCard.isNight} width="150spx" title={weatherCard.weatherString}/> 
+            <WeatherIcon weather={weatherCard.weather} isNight={weatherCard.isNight} width="150px" title={weatherCard.weatherString}/> 
             <h1 className="current-temperature">{CheckNotAvailable(weatherCard.temperature)}°</h1>
             <div className="current-time">{timeSecond}</div>
         </div>
