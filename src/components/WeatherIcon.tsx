@@ -56,9 +56,37 @@ export default function WeatherIcon(props: IWeatherIcon)
 
     function GetIconPath(weather: WeatherType): string
     {
+        const query = window.location.search;
+		const params = new URLSearchParams(query);
+		let weatherIconType = params.get("weather-icon");
+        if (!weatherIconType) 
+        {
+            // Uses Google's icon as default if none given
+            weatherIconType = "Google";
+        }
+
         const base = import.meta.env.BASE_URL;
-        const dir = "/WeatherIcons/Google/";
+        let dir = "/WeatherIcons/Google/";
         let file = "question-mark";
+        let extention = ".svg";
+
+        switch (weatherIconType) 
+        {
+            case "Flat":
+                dir = "/WeatherIcons/Flat/"
+                extention = ".png"
+                file = ParseFlatIcon(weather);
+                break;
+            default:
+                file = ParseGoogleIcon(weather);
+                break;
+        }
+        return base + dir + file + extention;
+    }
+
+    function ParseGoogleIcon(weather: WeatherType): string
+    {
+        let file = "General/question-mark";
         switch (weather)
         {
             case WeatherType.Clear:
@@ -149,10 +177,109 @@ export default function WeatherIcon(props: IWeatherIcon)
                 file = "General/umbrella";
                 break;
             default:
-                file = "question-mark";
+                file = "General/question-mark";
                 break;
         }
-        return base + dir + file + ".svg";
+        return file;
+    }
+
+    function ParseFlatIcon(weather: WeatherType): string
+    {
+        let file = "General/question-mark";
+        switch (weather)
+        {
+            case WeatherType.Clear:
+                file = (props.isNight? "Night/clear" : "Day/clear");
+                break;
+            case WeatherType.MostlyClear:
+                file = (props.isNight? "Night/partly_cloudy" : "Day/partly_cloudy");
+                break;
+            case WeatherType.PartlyCloudy:
+                file = (props.isNight? "Night/partly_cloudy" : "Day/partly_cloudy");
+                break;
+            case WeatherType.MostlyCloudy:
+                file = (props.isNight? "Night/mostly_cloudy_night" : "Day/mostly_cloudy_day");
+                break;
+            case WeatherType.ScatteredShowers:
+                file = "General/rain";
+                break;
+            case WeatherType.ScatteredSnow:
+                file = "General/snow";
+                break;
+            case WeatherType.ScatteredThunderstorms:
+                file = "General/thunderstorms";
+                break;
+            case WeatherType.Windy:
+                file = "General/haze";
+                break;
+            case WeatherType.Cloudy:
+                file = "General/cloudy";
+                break;
+            case WeatherType.Haze:
+                file = "General/haze";
+                break;
+            case WeatherType.Drizzle:
+                file = "General/rain";
+                break;
+            case WeatherType.ShowersRain:
+                file = "General/rain";
+                break;
+            case WeatherType.HeavyRain:
+                file = "General/rain";
+                break;
+            case WeatherType.Thunderstorms:
+                file = "General/thunderstorms";
+                break;
+            case WeatherType.StrongThunderstorms:
+                file = "General/thunderstorms";
+                break;
+            case WeatherType.RainSnow:
+                file = "General/snow";
+                break;
+            case WeatherType.RainHail:
+                file = "General/hail";
+                break;
+            case WeatherType.Flurries:
+                file = "General/snow";
+                break;
+            case WeatherType.ShowersSnow:
+                file = "General/snow";
+                break;
+            case WeatherType.Icy:
+                file = "General/snow";
+                break;
+            case WeatherType.Hail:
+                file = "General/hail";
+                break;
+            case WeatherType.HeavySnow:
+                file = "General/snow";
+                break;
+            case WeatherType.BlowingSnow:
+                file = "General/snow";
+                break;
+            case WeatherType.Blizzard:
+                file = "General/snow";
+                break;
+            case WeatherType.Tornado:
+                file = "General/tornado";
+                break;
+            case WeatherType.Typhoon:
+                file = "General/thunderstorms";
+                break;
+            case WeatherType.VeryHot:
+                file = "Day/clear";
+                break;
+            case WeatherType.VeryCold:
+                file = "General/snow";
+                break;
+            case WeatherType.Umbrella:
+                file = "General/rain";
+                break;
+            default:
+                file = "General/question-mark";
+                break;
+        }
+        return file;
     }
 
     return (
